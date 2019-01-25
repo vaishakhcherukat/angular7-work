@@ -1,0 +1,143 @@
+<div class="signup">
+	<mat-card>
+		<mat-card-content>
+			<form class="form" #registrationForm="ngForm">
+				<mat-card>
+					<mat-card-title class="card-title-head"> Name </mat-card-title>
+					<mat-form-field>
+						<input name="prefix" [OnlyAlphabets]="true" #prefix="ngModel" [(ngModel)]="person.name.prefix" matInput  placeholder="Prefix" type="name">
+						<mat-error align="start" *ngIf="prefix.invalid && (prefix.dirty || prefix.touched)" class="form__error">Enter name</mat-error>
+					</mat-form-field>
+	
+					<mat-form-field>
+						<input name="first" [OnlyAlphabets]="true" #first="ngModel" [(ngModel)]="person.name.first" matInput  placeholder="First Name" type="name">
+						<!-- <mat-error align="start" *ngIf="first.invalid && (first.dirty || first.touched)" class="form__error">Enter name</mat-error> -->
+					</mat-form-field>
+	
+					<mat-form-field>
+						<input name="middle" [OnlyAlphabets]="true" #middle="ngModel" [(ngModel)]="person.name.middle" matInput  placeholder="Middle Name" type="name">
+						<!-- <mat-error align="start" *ngIf="middle.invalid && (middle.dirty || middle.touched)" class="form__error">Enter name</mat-error> -->
+					</mat-form-field>
+	
+					<mat-form-field>
+						<input name="last" [OnlyAlphabets]="true" #last="ngModel" [(ngModel)]="person.name.last" matInput  placeholder="Last Name" type="name">
+						<!-- <mat-error align="start" *ngIf="last.invalid && (last.dirty || last.touched)" class="form__error">Enter name</mat-error> -->
+					</mat-form-field>
+	
+					<mat-form-field>
+						<input name="suffix" [OnlyAlphabets]="true" #suffix="ngModel" [(ngModel)]="person.name.suffix" matInput  placeholder="Suffix" type="name">
+						<!-- <mat-error align="start" *ngIf="suffix.invalid && (suffix.dirty || suffix.touched)" class="form__error">Enter name</mat-error> -->
+					</mat-form-field>
+	
+					<mat-form-field>
+						<input name="nickname" [OnlyAlphabets]="true" #nickname="ngModel" [(ngModel)]="person.name.nickname" matInput  placeholder="Nickname" type="name">
+						<!-- <mat-error align="start" *ngIf="nickname.invalid && (nickname.dirty || nickname.touched)" class="form__error">Enter name</mat-error> -->
+					</mat-form-field>
+				</mat-card>
+				<mat-card>
+					<mat-card-title class="card-title-head"> Company </mat-card-title>
+					<mat-form-field>
+						<input name="name" #name="ngModel" [(ngModel)]="person.company.name" matInput  placeholder="Company Name" type="name">
+						<!-- <mat-error align="start" *ngIf="name.invalid && (name.dirty || name.touched)" class="form__error">Enter name</mat-error> -->
+					</mat-form-field>
+	
+					<mat-form-field>
+						<input name="title" #title="ngModel" [(ngModel)]="person.company.title" matInput  placeholder="Title" type="name">
+						<!-- <mat-error align="start" *ngIf="title.invalid && (title.dirty || title.touched)" class="form__error">Enter name</mat-error> -->
+					</mat-form-field>
+				</mat-card>
+				<mat-card>
+					<mat-card-title class="card-title-head"> 
+						Address <button class="mat-mini-fab" color="primary" (click)="addNewAddress()">+</button>
+					</mat-card-title>
+					<ng-container *ngFor="let item of person.addresses; let index = index;">
+						<mat-form-field>
+							<input [name]="addressLine1 + index" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.addressLine1" matInput  placeholder="Address Line1" type="name">
+							<!-- <mat-error align="start" *ngIf="addressLine1.invalid && (addressLine1.dirty || addressLine1.touched)" class="form__error">Enter name</mat-error> -->
+						</mat-form-field>
+						
+						<mat-form-field>
+							<input [name]="addressLine2 + index" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.addressLine2" matInput  placeholder="Address Line2" type="name">
+							<!-- <mat-error align="start" *ngIf="addressLine2.invalid && (addressLine2.dirty || addressLine2.touched)" class="form__error">Enter name</mat-error> -->
+						</mat-form-field>
+		
+						<mat-form-field>
+							<input [name]="city + index" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.city" matInput  placeholder="City" type="name">
+							<!-- <mat-error align="start" *ngIf="city.invalid && (city.dirty || city.touched)" class="form__error">Enter name</mat-error> -->
+						</mat-form-field>
+		
+						<mat-form-field>
+							<input [name]="state + index" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.state" matInput  placeholder="State" type="name">
+							<!-- <mat-error align="start" *ngIf="state.invalid && (state.dirty || state.touched)" class="form__error">Enter name</mat-error> -->
+						</mat-form-field>
+		
+						<mat-form-field>
+							<input [name]="postal + index" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.postal" matInput  placeholder="Postal" type="name">
+							<!-- <mat-error align="start" *ngIf="postal.invalid && (postal.dirty || postal.touched)" class="form__error">Enter name</mat-error> -->
+						</mat-form-field>
+		
+						<mat-form-field>
+							<input [name]="country + index" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.country" matInput  placeholder="Country" type="name">
+							<!-- <mat-error align="start" *ngIf="country.invalid && (country.dirty || country.touched)" class="form__error">Enter name</mat-error> -->
+						</mat-form-field>
+
+						<mat-form-field>
+							<input [name]="label + index" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.label" matInput  placeholder="Label" type="name">
+							<!-- <mat-error align="start" *ngIf="label.invalid && (label.dirty || label.touched)" class="form__error">Enter name</mat-error> -->
+						</mat-form-field>
+						<button class="mat-mini-fab mat-mini-remove" color="primary" *ngIf="person.addresses.length > 1" (click)="removeAddress(item)">-</button>
+						<ng-container *ngIf="person.addresses.length > 0 && index !== (person.addresses.length - 1)"> <hr/> </ng-container>
+					</ng-container>
+				</mat-card>
+
+				<mat-card>
+					<mat-card-title class="card-title-head"> 
+						Phone <button class="mat-mini-fab" color="primary" (click)="addNewPhone()">+</button>
+					</mat-card-title>
+					<ng-container *ngFor="let item of person.phones; let index = index;">
+						<mat-form-field>
+							<input [name]="number + index" [OnlyNumber]="true" [ngModelOptions]="{standalone: true}"  [(ngModel)]="item.number" matInput  placeholder="Number" type="name">
+							<!-- <mat-error align="start" *ngIf="number.invalid && (number.dirty || number.touched)" class="form__error">Enter name</mat-error> -->
+						</mat-form-field>
+						
+						<mat-form-field>
+							<input [name]="extension + index" [OnlyNumber]="true" [ngModelOptions]="{standalone: true}"  [(ngModel)]="item.extension" matInput  placeholder="Extension" type="name">
+							<!-- <mat-error align="start" *ngIf="extension.invalid && (extension.dirty || extension.touched)" class="form__error">Enter name</mat-error> -->
+						</mat-form-field>
+
+						<mat-form-field>
+							<input [name]="label + index" [ngModelOptions]="{standalone: true}"  [(ngModel)]="item.label" matInput  placeholder="Label" type="name">
+							<!-- <mat-error align="start" *ngIf="label.invalid && (label.dirty || label.touched)" class="form__error">Enter name</mat-error> -->
+						</mat-form-field>
+		
+						<button class="mat-mini-fab mat-mini-remove" color="primary" *ngIf="person.phones.length > 1" (click)="removePhone(item)">-</button>
+						<ng-container *ngIf="person.phones.length > 0 && index !== (person.phones.length - 1)"> <hr/> </ng-container>
+					</ng-container>
+				</mat-card>
+				<mat-card>
+					<mat-card-title class="card-title-head"> 
+						Email <button class="mat-mini-fab" color="primary" (click)="addNewEmail()">+</button>
+					</mat-card-title>
+					<ng-container *ngFor="let item of person.emails; let index = index;">
+						<mat-form-field>
+							<input [name]="address + index" [ngModelOptions]="{standalone: true}" [(ngModel)]="item.address" matInput  placeholder="Address" type="name" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+							<!-- <ng-container *ngIf="address.invalid && (address.dirty || address.touched)">
+									<mat-error align="start"  class="form__error">Enter valid email</mat-error>
+							</ng-container> -->
+							
+						</mat-form-field>
+						
+						<mat-form-field>
+							<input [name]="label + index"[ngModelOptions]="{standalone: true}" [(ngModel)]="item.label" matInput  placeholder="Label" type="name">
+							<!-- <mat-error align="start" *ngIf="label.invalid && (label.dirty || label.touched)" class="form__error">Enter name</mat-error> -->
+						</mat-form-field>
+		
+						<button class="mat-mini-fab mat-mini-remove" color="primary" *ngIf="person.emails.length > 1" (click)="removeEmail(item)">-</button>
+						<ng-container *ngIf="person.emails.length > 0 && index !== (person.emails.length - 1)"> <hr/> </ng-container>
+					</ng-container>
+				</mat-card>
+			</form>
+			<button class="mat-button-full-width" mat-raised-button color="primary" (click)="registerUser(registrationForm)">Submit</button>
+		</mat-card-content>
+	</mat-card>
+</div>
